@@ -28,9 +28,6 @@ public class ToDoController {
         return "addTodo";
     }
 
-     /*
-    @ModelAttribute đánh dấu đối tượng Todo được gửi lên bởi Form Request
-     */
     @PostMapping("/addTodo")
     public String addTodo(@ModelAttribute ToDoWork todo) {
         todoService.add(todo);
