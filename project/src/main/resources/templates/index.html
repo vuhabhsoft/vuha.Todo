@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>To-do</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+</head>
+<body>
+<h1 th:text="#{vu.message.hello}"></h1>
+
+<a th:href="@{/listTodo}" th:text="#{vu.value.viewListTodo}" class="btn btn-primary"></a>
+<a th:href="@{/addTodo}" th:text="#{vu.value.addTodo}" class="btn btn-success"></a>
+<!-- <a th:href="@{/delTodo}" th:text="#{vu.value.delTodo}" class="btn btn-success"></a> -->
+</body>
+
+</html>

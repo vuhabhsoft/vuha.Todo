@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>To-do</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <!--css-->
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+
+</head>
+<body>
+<h1>To-do</h1>
+
+<form method="DELETE" action="/delTodo">
+    <p>Number to delete: </p><input type="input" name="Id"></p>
+    <p><button type="submit" class="btn btn-success">Delete</button></p>
+  </form>
+<!-- <form th:action="@{/delTodo/{}}" th:object="${todo}" method="del">
+  <p>Id: <input type="text" th:field="*{Id}" /></p>
+  <p><button type="submit" class="btn btn-success">Add</button></p>
+</form> -->
+</body>
+
+</html>
