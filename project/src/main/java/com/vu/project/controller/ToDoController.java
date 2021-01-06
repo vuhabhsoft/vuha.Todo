@@ -6,7 +6,7 @@ import com.vu.project.model.ToDoWork;
 import com.vu.project.service.ToDoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.*;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ public class ToDoController {
 
     @GetMapping("/listTodo")
     public String findAll(Model model) {
-        model.addAttribute("todoList", todoService.findAll());
+        model.addAttribute("todoList", todoService.findAllTodo());
         return "listTodo";
     }
 
@@ -28,30 +28,33 @@ public class ToDoController {
         return "addTodo";
     }
 
+    
     @PostMapping("/addTodo")
     public String addTodo(@ModelAttribute ToDoWork todo) {
-        todoService.add(todo);
+        todoService.save(todo);
         return "success";
     }
 
-    // @GetMapping("/delTodo")
-    // public String delTodo(ToDoWork todo) {        
-    //     return "delToDo";
-    // }
+    @GetMapping("/delTodo")
+    public String delTodo(Model model) {
+        model.addAttribute("todo", new ToDoWork());
+        return "delToDo";
+     }
 
-    // @RequestMapping(value = "/delTodo/{id}", method = RequestMethod.DELETE)
-    // public String delTodo(@PathVariable("id") Long id){
-    //     Optional<ToDoWork> todo = todoService.findById(id);
-    //     todoService.remove(todo.get());
-    //     return "delsuccess";
-    // }
-    // //  @RequestMapping(value = "/products/{id}/delete", method = RequestMethod.DELETE)
-    // // public ResponseEntity<Product> deleteProduct(@PathVariable("id") Integer id) {
-    // //     Optional<Product> product = productService.findById(id);
-    // //     if (!product.isPresent()) {
-    // //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    // //     }
-    // //     productService.remove(product.get());
-    // //     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    // // }
+    @RequestMapping("/todo/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        todoService.deleteById(id);
+        return "redirect:/listTodo";
+    }
+    @RequestMapping("/todo/edit/{id}")
+    public String edit(Model model ,@PathVariable Integer id) {
+        model.addAttribute("todo", todoService.getTodoById(id));
+        return "addTodo";
+    }
+    @RequestMapping("/todo/detail/{id}")
+    public String detail(Model model ,@PathVariable Integer id) {
+
+        model.addAttribute("todo", todoService.getTodoById(id));
+        return "ToDoShow";
+    }
 }
